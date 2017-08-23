@@ -34,6 +34,7 @@ syn keyword	serTodo	TODO FIXME XXX contained
 syn match	serOperator		'!\|&&\|||\|=[~=]\?\|>\|<\|+\|-\|/\|\*\||\|&\|^\|\~\|defined\|eq\|ieq\|ne\|ine\|mod' display contained
 
 syn region	serCppComment		start='/\*' end='\*/' contains=serTodo
+syn match	serJavaComment		'//.*$' contains=serTodo
 syn match	serHashDefine	'#!define\s\|#!ifdef\s\|#!ifndef\s\|#!endif\|#!else\|#!substdef\|#!subst\|!!define\s\|!!ifdef\s\|!!ifndef\s\|!!endif\|!!else\|!!substdef\|!!subst\|#!KAMAILIO\|#!OPENSER\|#!SER\|#!MAXCOMPAT\|#!ALL'
 " syn match	serHashDefine	'^\s*#!.+$'
 syn match	serHashComment	'#[^!].*$\|#$' contains=serTodo
@@ -59,10 +60,11 @@ syn region	serBlock	start='{' end='}' contained contains=serBlock,@serCodeElemen
 syn match	serRouteBlock	'\(failure_\|onreply_\|branch_\|event_\|onsend_\|request_\|reply_\)\?route\(\s*\[[^\]]\+\]\)\?' contained contains=serNumber,serString,serIdentifier
 syn region	serRrouteBlockFold	matchgroup=serRouteBlock start="\(failure_\|onreply_\|branch_\|event_\|onsend_\|request_\|reply_\)\?route\(\s*\[[^\]]\+\]\)\?\s*\n\?{" matchgroup=NONE end="}" contains=serBlock,@serCodeElements
 
-syn cluster	serCodeElements contains=serHashDefine,serCppComment,serHashComment,serNumber,serString,serVariable,serOperator,serStatement,serKeyword,serCoreKeyword,serCoreValue,serCoreFunction,serIdentifier
+syn cluster	serCodeElements contains=serHashDefine,serCppComment,serJavaComment,serHashComment,serNumber,serString,serVariable,serOperator,serStatement,serKeyword,serCoreKeyword,serCoreValue,serCoreFunction,serIdentifier
 
 hi def link serCppComment Comment
 hi def link serHashComment Comment
+hi def link serJavaComment Comment
 hi def link serHashDefine Special
 hi def link serTodo Todo
 
